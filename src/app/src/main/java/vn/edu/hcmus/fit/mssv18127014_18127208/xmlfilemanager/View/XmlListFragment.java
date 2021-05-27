@@ -17,12 +17,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import org.jetbrains.annotations.NotNull;
 
 import pub.devrel.easypermissions.EasyPermissions;
 import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.Adapters.XmlFilesAdapter;
+import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.Codes.ErrorCode;
 import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.R;
-import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.RequestCode;
+import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.Codes.RequestCode;
 import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.ViewModels.XMLFileViewModel.XmlFileViewModel;
 
 public class XmlListFragment extends Fragment{
@@ -44,6 +47,12 @@ public class XmlListFragment extends Fragment{
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        BottomNavigationView navBar = requireActivity().findViewById(R.id.nav_view);
+
+        if (navBar != null) {
+            navBar.setVisibility(View.VISIBLE);
+        }
+
         this.xml_file_view_model = new ViewModelProvider(requireActivity()).get(XmlFileViewModel.class);
 
         String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE};
@@ -64,14 +73,15 @@ public class XmlListFragment extends Fragment{
     }
 
     private void setupViewsContent() {
-        setupAdapter();
+//        requireActivity().findViewById(R.id.nav_view).setVisibility(View.INVISIBLE);
 
+        setupAdapter();
         this.xml_files_recycler_view.setAdapter(xml_files_adapter);
         this.xml_files_recycler_view.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
     }
 
     private void setupAdapter() {
-        this.xml_files_adapter = new XmlFilesAdapter(requireContext(), new ImportHandler());
+        this.xml_files_adapter = new XmlFilesAdapter(requireContext());
         this.xml_files_adapter.setFilesName(this.xml_file_view_model.getXmlFilesName(requireContext()));
         this.xml_files_adapter.setImportProgressBar(this.importProgressBar);
         this.xml_files_adapter.setImportHandler(new ImportHandler());
@@ -82,18 +92,21 @@ public class XmlListFragment extends Fragment{
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-
+            importProgressBar.setVisibility(View.INVISIBLE);
             switch (msg.what) {
-                case 0: {
-                    importProgressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(requireContext(), R.string.import_xml_fail, Toast.LENGTH_LONG).show();
+                case ErrorCode.fileNotFound: {
+                    Toast.makeText(requireContext(), R.string.file_not_found_error, Toast.LENGTH_LONG).show();
+                    break;
+                }case ErrorCode.copyFileFail: {
+                    Toast.makeText(requireContext(), R.string.copy_file_fail_error, Toast.LENGTH_LONG).show();
+                    break;
+                }case ErrorCode.parseXMLFail: {
+                    Toast.makeText(requireContext(), R.string.parse_xml_fail_error, Toast.LENGTH_LONG).show();
                     break;
                 } case 1: {
-                    importProgressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(requireContext(), R.string.import_xml_success, Toast.LENGTH_LONG).show();
                     break;
                 } default: {
-                    importProgressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(requireContext(), R.string.import_xml_fail, Toast.LENGTH_LONG).show();
                     break;
                 }

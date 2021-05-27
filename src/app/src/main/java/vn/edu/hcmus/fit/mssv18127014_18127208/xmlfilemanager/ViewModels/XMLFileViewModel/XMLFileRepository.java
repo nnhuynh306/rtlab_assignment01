@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.Codes.ErrorCode;
 import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.Models.XMLFile;
 import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.Utils.FilePathUtil;
 import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.ViewModels.XMLFileDatabase;
@@ -96,22 +97,22 @@ public class XMLFileRepository {
                 catch (IOException e)
                 {
                     e.printStackTrace();
-                    this.handler.sendEmptyMessage(0);
+                    this.handler.sendEmptyMessage(ErrorCode.copyFileFail);
                     return null;
                 }
 
                 handler.sendEmptyMessage(1);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                this.handler.sendEmptyMessage(0);
+                this.handler.sendEmptyMessage(ErrorCode.fileNotFound);
                 return null;
             } catch (XmlPullParserException e) {
                 e.printStackTrace();
-                this.handler.sendEmptyMessage(0);
+                this.handler.sendEmptyMessage(ErrorCode.parseXMLFail);
                 return null;
             } catch (IOException e) {
                 e.printStackTrace();
-                this.handler.sendEmptyMessage(0);
+                this.handler.sendEmptyMessage(ErrorCode.parseXMLFail);
                 return null;
             }
 
