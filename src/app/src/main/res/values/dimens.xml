@@ -6,4 +6,5 @@
     <dimen name="xml_file_list_item_padding">10sp</dimen>
     <dimen name="xml_file_list_item_vertical_margin">10sp</dimen>
     <dimen name="button_size">48sp</dimen>
+    <dimen name="progress_bar_width">100sp</dimen>
 </resources>

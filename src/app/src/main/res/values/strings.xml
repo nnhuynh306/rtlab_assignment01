@@ -11,4 +11,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="xml_files">XML files</string>
     <string name="imported_files">Imported files</string>
+    <string name="import_xml_fail">Failed to import XML</string>
+    <string name="import_xml_success">XML file is imported</string>
 </resources>

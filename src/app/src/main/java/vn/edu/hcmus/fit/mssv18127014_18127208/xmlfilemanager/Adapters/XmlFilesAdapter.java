@@ -1,30 +1,45 @@
 package vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.Adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.R;
+import vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.ViewModels.XMLFileViewModel.XmlFileViewModel;
 
 public class XmlFilesAdapter extends RecyclerView.Adapter<XmlFilesAdapter.ViewHolder> {
 
     private static final String TAG = "XmlFilesAdapter";
     private ArrayList<String> filesName;
     private Context context;
+    private Handler importHandler = null;
+    private ProgressBar importProgressBar = null;
+    private XmlFileViewModel xmlFileViewModel;
 
-    public XmlFilesAdapter(Context context) {
+    public XmlFilesAdapter(Context context, Handler importHandler) {
         this.context = context;
+    }
+
+    public void setImportHandler(Handler importHandler) {
+        this.importHandler = importHandler;
+    }
+
+    public void setImportProgressBar(ProgressBar importProgressBar) {
+        this.importProgressBar = importProgressBar;
+    }
+
+    public void setXmlFileViewModel(XmlFileViewModel xmlFileViewModel) {
+        this.xmlFileViewModel = xmlFileViewModel;
     }
 
     public void setFilesName(ArrayList<String> filesName) {
@@ -51,10 +66,22 @@ public class XmlFilesAdapter extends RecyclerView.Adapter<XmlFilesAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView xml_file_name_text_view;
+        ImageButton import_btn;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            xml_file_name_text_view = itemView.findViewById(R.id.xml_file_name);
+            this.xml_file_name_text_view = itemView.findViewById(R.id.xml_file_name);
+            this.import_btn = itemView.findViewById(R.id.import_btn);
+
+            this.import_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    xmlFileViewModel.importXMLFile(context, filesName.get(getAdapterPosition()),
+                            importHandler, importProgressBar);
+
+                    importProgressBar.setVisibility(View.VISIBLE);
+                }
+            });
         }
     }
 }
