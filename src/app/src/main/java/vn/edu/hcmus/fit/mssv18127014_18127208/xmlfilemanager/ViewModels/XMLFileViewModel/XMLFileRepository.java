@@ -52,7 +52,7 @@ public class XMLFileRepository {
 
     public void importXMLFile(Context context, String XMLFileName, Handler handler, ProgressBar progressBar) {
         String XMLFileAbsolutePath = FilePathUtil.getDataFolder() + "/" + XMLFileName;
-        String XMLFileDestinationAbsolutePath = FilePathUtil.getAppPrivateFolder(context) + "/" + XMLFileName;
+        String XMLFileDestinationAbsolutePath = FilePathUtil.getAppPrivateFolder(context) + "/official-data/" + XMLFileName;
         new ImportXMLFileAyncTask(progressBar, handler).execute(
                 XMLFileAbsolutePath, XMLFileDestinationAbsolutePath
         );
