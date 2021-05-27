@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/xmlListFragment">
+    <fragment
+        android:id="@+id/XMLImportedListFragment"
+        android:name="vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.View.XMLImportedListFragment"
+        android:label="XMLImportedListFragment" />
+    <fragment
+        android:id="@+id/xmlListFragment"
+        android:name="vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.View.XmlListFragment"
+        android:label="XmlListFragment" />
+</navigation>

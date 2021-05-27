@@ -1,1 +1,5 @@
-- data: .xml in "data" folder.
+- data: .xml in "data" folder 
+
+- main screens:
+	- list of xml files
+	- 
