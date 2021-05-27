@@ -26,7 +26,7 @@ public class XmlFilesAdapter extends RecyclerView.Adapter<XmlFilesAdapter.ViewHo
     private ProgressBar importProgressBar = null;
     private XmlFileViewModel xmlFileViewModel;
 
-    public XmlFilesAdapter(Context context, Handler importHandler) {
+    public XmlFilesAdapter(Context context) {
         this.context = context;
     }
 

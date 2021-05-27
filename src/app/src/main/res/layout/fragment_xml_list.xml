@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/files"/>
+        app:title="@string/xml_files"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/xml_files_recycler_view"

@@ -7,9 +7,24 @@
     <fragment
         android:id="@+id/XMLImportedListFragment"
         android:name="vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.View.XMLImportedListFragment"
-        android:label="XMLImportedListFragment" />
+        android:label="XMLImportedListFragment" >
+        <action
+            android:id="@+id/action_XMLImportedListFragment_to_XMLImportedDetailFragment"
+            app:destination="@id/XMLImportedDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/xmlListFragment"
         android:name="vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.View.XmlListFragment"
         android:label="XmlListFragment" />
+    <fragment
+        android:id="@+id/XMLImportedDetailFragment"
+        android:name="vn.edu.hcmus.fit.mssv18127014_18127208.xmlfilemanager.View.XMLImportedDetailFragment"
+        android:label="XMLImportedDetailFragment" >
+        <argument
+            android:name="instanceID"
+            app:argType="string" />
+        <argument
+            android:name="filePath"
+            app:argType="string" />
+    </fragment>
 </navigation>
